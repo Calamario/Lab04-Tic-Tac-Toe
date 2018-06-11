@@ -38,6 +38,11 @@ namespace Tic_Tac_Toe
             // Makes a board object to call its method ShowPlayArea.
             GameBoard gameBoard = new GameBoard();
             gameBoard.ShowPlayArea();
+
+            if (player1.MyTurn)
+            {
+
+            }
         }
     }
 }
