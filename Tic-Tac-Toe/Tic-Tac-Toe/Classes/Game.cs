@@ -6,6 +6,6 @@ namespace Tic_Tac_Toe.Classes
 {
     class Game
     {
-        public void 
+        public int[] GuessedNum = new int[9];
     }
 }

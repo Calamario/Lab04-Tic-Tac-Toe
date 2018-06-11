@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Tic_Tac_Toe.Classes;
 
 namespace Tic_Tac_Toe
@@ -39,7 +40,31 @@ namespace Tic_Tac_Toe
             GameBoard gameBoard = new GameBoard();
             gameBoard.ShowPlayArea();
 
+            Game game = new Game();
+
+            int counter = 0;
+
             if (player1.MyTurn)
+            {
+                Console.WriteLine($"It is your turn, {player1.Name}. Please choose your position");
+                Int32.TryParse(Console.ReadLine(), out int number);
+                if (!game.GuessedNum.Contains(number))
+                {
+                    game.GuessedNum[counter] = number;
+                    for (int i = 0; i < gameBoard.PlayArea.Length; i++)
+                    {
+                        for (int j = 0; j < gameBoard.PlayArea[i].Length; j++)
+                        {
+                            if (gameBoard.PlayArea[i][j] == number.ToString())
+                            {
+                                gameBoard.PlayArea[i][j] = player1.Marker;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (player1)
             {
 
             }
