@@ -12,5 +12,10 @@ namespace Tic_Tac_Toe.Classes
 
         public bool MyTurn { get; set; }
 
+        public int PlayCounter { get; set; } = 0;
+
+        public int[] GuessedNum { get; set; }
+
+        public bool WinningPlayer { get; set; } = false;
     }
 }

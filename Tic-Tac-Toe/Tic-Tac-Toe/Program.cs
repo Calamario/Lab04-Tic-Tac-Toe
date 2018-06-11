@@ -9,6 +9,8 @@ namespace Tic_Tac_Toe
         static void Main(string[] args)
         {
             PlayGame();
+            Console.WriteLine("game done");
+            Console.ReadLine();
         }
 
         static void PlayGame()
@@ -23,6 +25,7 @@ namespace Tic_Tac_Toe
                 Name = p1,
                 Marker = "X",
                 MyTurn = true,
+                GuessedNum = new int[5],
             };
 
             Console.WriteLine("Player Two, please enter your name.");
@@ -34,6 +37,7 @@ namespace Tic_Tac_Toe
                 Name = p2,
                 Marker = "O",
                 MyTurn = false,
+                GuessedNum = new int[4],
             };
 
             // Makes a board object to call its method ShowPlayArea.
@@ -42,32 +46,58 @@ namespace Tic_Tac_Toe
 
             Game game = new Game();
 
+            //Player whoPlaying = player1.MyTurn ? player1 : player2;
+
             int counter = 0;
 
-            if (player1.MyTurn)
+            while (!player1.WinningPlayer)
             {
-                Console.WriteLine($"It is your turn, {player1.Name}. Please choose your position");
-                Int32.TryParse(Console.ReadLine(), out int number);
-                if (!game.GuessedNum.Contains(number))
+                int number = 0;
+                while (number == 0)
                 {
-                    game.GuessedNum[counter] = number;
-                    for (int i = 0; i < gameBoard.PlayArea.Length; i++)
+                    Console.WriteLine($"It is your turn, {player1.Name}. Please choose your position");
+                    Int32.TryParse(Console.ReadLine(), out number);
+                    if (!game.GuessedNum.Contains(number))
                     {
-                        for (int j = 0; j < gameBoard.PlayArea[i].Length; j++)
+                        game.GuessedNum[counter] = number;
+                        for (int i = 0; i < gameBoard.PlayArea.Length; i++)
                         {
-                            if (gameBoard.PlayArea[i][j] == number.ToString())
+                            for (int j = 0; j < gameBoard.PlayArea[i].Length; j++)
                             {
-                                gameBoard.PlayArea[i][j] = player1.Marker;
+                                if (gameBoard.PlayArea[i][j] == number.ToString())
+                                {
+                                    gameBoard.PlayArea[i][j] = player1.Marker;
+                                    player1.GuessedNum[player1.PlayCounter] = number;
+                                    player1.PlayCounter++;
+                                }
                             }
                         }
                     }
                 }
+                gameBoard.ShowPlayArea();
+
+                if (player1.GuessedNum.Length >= 3)
+                {
+                    for (int i = 0; i < game.Winner.Length; i++)
+                    {
+                        int winScore = 0;
+                        for (int j = 0; j < game.Winner[i].Length; j++)
+                        {
+                            if (player1.GuessedNum.Contains(game.Winner[i][j]))
+                            {
+                                winScore++;
+                            }
+                        }
+                        if (winScore == 3)
+                        {
+                            player1.WinningPlayer = true;
+                            break;
+                        }
+                    }
+                }
+
             }
 
-            if (player1)
-            {
-
-            }
         }
     }
 }
