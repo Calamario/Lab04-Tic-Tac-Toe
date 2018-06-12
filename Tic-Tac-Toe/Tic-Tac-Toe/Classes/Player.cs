@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tic_Tac_Toe.Classes
 {
-    class Player
+    public class Player
     {
         public string Name { get; set; }
 
@@ -12,5 +12,10 @@ namespace Tic_Tac_Toe.Classes
 
         public bool MyTurn { get; set; }
 
+        public int PlayCounter { get; set; } = 0;
+
+        public int[] GuessedNum { get; set; }
+
+        public bool WinningPlayer { get; set; } = false;
     }
 }

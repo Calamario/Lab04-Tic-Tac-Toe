@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tic_Tac_Toe.Classes
 {
-    class GameBoard
+    public class GameBoard
     {
         public string[][] PlayArea = new string[][]
         {
@@ -13,7 +13,10 @@ namespace Tic_Tac_Toe.Classes
             new string[] { "7", "8", "9" }
         };
 
-        public void ShowPlayArea()
+        /// <summary>
+        /// A method to display the current state of the board on the Console
+        /// </summary>
+        public string ShowPlayArea()
         {
             for (int i = 0; i < PlayArea.Length; i++)
             {
@@ -23,6 +26,7 @@ namespace Tic_Tac_Toe.Classes
                 }
                 Console.WriteLine();
             }
+            return "Game Board Displayed";
         }
     }
 }
