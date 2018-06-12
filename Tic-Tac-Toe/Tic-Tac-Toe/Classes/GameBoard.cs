@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tic_Tac_Toe.Classes
 {
-    class GameBoard
+    public class GameBoard
     {
         public string[][] PlayArea = new string[][]
         {

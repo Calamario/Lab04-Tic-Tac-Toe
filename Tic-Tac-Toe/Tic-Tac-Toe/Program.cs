@@ -4,19 +4,25 @@ using Tic_Tac_Toe.Classes;
 
 namespace Tic_Tac_Toe
 {
-    class Program
+    public   class Program
     {
         static void Main(string[] args)
         {
-            PlayGame();
-            Console.WriteLine("game done");
+            bool continueGame = true;
+            while (continueGame)
+            {
+                PlayGame();
+                continueGame = PlayAgain();
+            }
+            Console.WriteLine("GG. Goodbbye.");
             Console.ReadLine();
         }
 
         static void PlayGame()
         {
+            Console.Clear();
             Console.WriteLine("Welcome to Tic-Tac-Toe!");
-            Console.WriteLine("Player One, please enter your name.");
+            Console.WriteLine("Player one, please enter your name.");
             string p1 = Console.ReadLine();
 
             // Makes new player object with given name.
@@ -41,63 +47,30 @@ namespace Tic_Tac_Toe
             };
 
             // Makes a board object to call its method ShowPlayArea.
-            GameBoard gameBoard = new GameBoard();
+            GameBoard gameBoard = new GameBoard { };
             gameBoard.ShowPlayArea();
 
+            // Creates a new instance of Game class
             Game game = new Game();
 
-            //Player whoPlaying = player1.MyTurn ? player1 : player2;
+            game.GameLogic(player1, player2, gameBoard);
+        }
 
-            int counter = 0;
-
-            while (!player1.WinningPlayer)
+        static bool PlayAgain()
+        {
+            Console.WriteLine("Would you like to start a new game?");
+            int number = 0;
+            while (number == 0)
             {
-                int number = 0;
-                while (number == 0)
+                Console.WriteLine("1) Play Again");
+                Console.WriteLine("2) Exit");
+                Int32.TryParse(Console.ReadLine(), out number);
+                if (number == 2)
                 {
-                    Console.WriteLine($"It is your turn, {player1.Name}. Please choose your position");
-                    Int32.TryParse(Console.ReadLine(), out number);
-                    if (!game.GuessedNum.Contains(number))
-                    {
-                        game.GuessedNum[counter] = number;
-                        for (int i = 0; i < gameBoard.PlayArea.Length; i++)
-                        {
-                            for (int j = 0; j < gameBoard.PlayArea[i].Length; j++)
-                            {
-                                if (gameBoard.PlayArea[i][j] == number.ToString())
-                                {
-                                    gameBoard.PlayArea[i][j] = player1.Marker;
-                                    player1.GuessedNum[player1.PlayCounter] = number;
-                                    player1.PlayCounter++;
-                                }
-                            }
-                        }
-                    }
+                    return false;
                 }
-                gameBoard.ShowPlayArea();
-
-                if (player1.GuessedNum.Length >= 3)
-                {
-                    for (int i = 0; i < game.Winner.Length; i++)
-                    {
-                        int winScore = 0;
-                        for (int j = 0; j < game.Winner[i].Length; j++)
-                        {
-                            if (player1.GuessedNum.Contains(game.Winner[i][j]))
-                            {
-                                winScore++;
-                            }
-                        }
-                        if (winScore == 3)
-                        {
-                            player1.WinningPlayer = true;
-                            break;
-                        }
-                    }
-                }
-
             }
-
+            return true;
         }
     }
 }
