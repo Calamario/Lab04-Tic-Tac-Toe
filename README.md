@@ -24,4 +24,4 @@ they win!
 * Run the prewritten tests or create your own.
 
 ## What it looks like
-![unit-testing](/Tic_Tac_Toe/Tic_Tac_Toe/assets/TicTacToe-visual.PNG)
+![tictactoe](Tic-Tac-Toe/Tic-Tac-Toe/Assets/TicTacToe-visual.PNG)
