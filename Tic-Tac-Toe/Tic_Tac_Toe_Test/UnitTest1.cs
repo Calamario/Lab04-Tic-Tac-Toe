@@ -8,9 +8,8 @@ namespace Tic_Tac_Toe_Test
     {
         [Theory]
         [InlineData(new int[] { 1, 2, 3, 7 })]
-        [InlineData(new int[] { 1, 4, 5, 8 })]
         [InlineData(new int[] { 1, 5, 9, 6 })]
-        public void TestWhoIsTheWinner1(int[] value)
+        public void TestWhoIsTheWinner(int[] value)
         {
             //arrange
             Player player1 = new Player
@@ -28,6 +27,28 @@ namespace Tic_Tac_Toe_Test
 
             //assert
             Assert.True(winner);
+        }
+        [Theory]
+        [InlineData(new int[] { 1, 4, 5, 8 })]
+        [InlineData(new int[] { 1, 5, 7, 6 })]
+        public void TestMakeSureNotWinner(int[] value)
+        {
+            //arrange
+            Player player1 = new Player
+            {
+                Name = "bob",
+                Marker = "X",
+                MyTurn = false,
+                GuessedNum = value
+            };
+
+            Game game = new Game();
+
+            //act
+            bool winner = game.DidSomeoneWin(player1);
+
+            //assert
+            Assert.False(winner);
         }
 
         [Fact]
@@ -91,8 +112,9 @@ namespace Tic_Tac_Toe_Test
         }
 
         [Theory]
-        [InlineData(2, new int[] { 1, 3, 4 }, 3)]
-        public void TestUserPositionGetsSaved(int num, int[] value, int index)
+        [InlineData(2, new int[] { 0 })]
+        [InlineData(9, new int[] { 0 })]
+        public void TestUserPositionGetsSaved(int num, int[] value)
         {
             //arrange
             Player player1 = new Player
@@ -101,7 +123,6 @@ namespace Tic_Tac_Toe_Test
                 Marker = "X",
                 MyTurn = false,
                 GuessedNum = value,
-                PlayCounter = index
             };
 
             GameBoard gameBoard = new GameBoard();
@@ -111,7 +132,21 @@ namespace Tic_Tac_Toe_Test
             game.ShowMarkerOnBoard(num, gameBoard, player1);
 
             //assert
-            Assert.Contains(2, );
+            Assert.Contains(num, player1.GuessedNum);
+        }
+
+        [Fact]
+        public void TestGameBoardDisplayToConsole()
+        {
+            //arrange
+            GameBoard gameBoard = new GameBoard();
+
+            //act
+            string rtnstring = gameBoard.ShowPlayArea();
+
+            //assert
+            Assert.Equal("Game Board Displayed", rtnstring);
+
         }
     }
 }

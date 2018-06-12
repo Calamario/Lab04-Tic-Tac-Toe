@@ -18,6 +18,9 @@ namespace Tic_Tac_Toe
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// To start the game. Has both players input their names.
+        /// </summary>
         static void PlayGame()
         {
             Console.Clear();
@@ -56,6 +59,10 @@ namespace Tic_Tac_Toe
             game.GameLogic(player1, player2, gameBoard);
         }
 
+        /// <summary>
+        /// Runs after the game has completed to ask the users if they want to play again or quit
+        /// </summary>
+        /// <returns> Boolean to continue or quit </returns>
         static bool PlayAgain()
         {
             Console.WriteLine("Would you like to start a new game?");

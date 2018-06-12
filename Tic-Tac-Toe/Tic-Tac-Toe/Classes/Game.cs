@@ -7,6 +7,12 @@ namespace Tic_Tac_Toe.Classes
 {
     public class Game
     {
+        /// <summary>
+        /// Main logic of the game. Starts and ends the game.
+        /// </summary>
+        /// <param name="player1"> A Player Object for player one </param>
+        /// <param name="player2"> A Player Object for player two </param>
+        /// <param name="gameBoard"> The game board object </param>
         public void GameLogic(Player player1, Player player2, GameBoard gameBoard)
         {
             int counter = 0;
@@ -39,6 +45,9 @@ namespace Tic_Tac_Toe.Classes
             }
         }
 
+        /// <summary>
+        /// All the possible winning conditions
+        /// </summary>
         public int[][] Winner = new int[][]
         {
             new int[] {1, 2, 3},
@@ -53,7 +62,13 @@ namespace Tic_Tac_Toe.Classes
             new int[] {3, 5, 7}
         };
 
-       
+        /// <summary>
+        /// Toggles between the two players. If player one has gone, then lets player two go and vice versa
+        /// </summary>
+        /// <param name="whoPlaying"> Player refernce on Who is playing </param>
+        /// <param name="p1"> player 1 object </param>
+        /// <param name="p2"> player 2 object </param>
+        /// <returns></returns>
         public Player WhoseTurn(Player whoPlaying, Player p1, Player p2)
         {
             whoPlaying = p1.MyTurn ? p1 : p2;
@@ -61,6 +76,12 @@ namespace Tic_Tac_Toe.Classes
             return whoPlaying;
         }
 
+        /// <summary>
+        /// After taking the user's position, Saves that into the player's property(an array) and updates the game baord
+        /// </summary>
+        /// <param name="number"> the user's valid position </param>
+        /// <param name="gameBoard"> gameboard object </param>
+        /// <param name="whoPlaying"> reference to who is currently playing </param>
         public void ShowMarkerOnBoard( int number, GameBoard gameBoard, Player whoPlaying)
         {
             whoPlaying.GuessedNum[whoPlaying.PlayCounter] = number;
@@ -78,7 +99,11 @@ namespace Tic_Tac_Toe.Classes
             }
         }
 
-
+        /// <summary>
+        /// Method to checks if someone has won.
+        /// </summary>
+        /// <param name="whoPlaying">The reference to who is playing </param>
+        /// <returns> a boolean </returns>
         public bool DidSomeoneWin(Player whoPlaying)
         {
             if (whoPlaying.GuessedNum.Length >= 3)
