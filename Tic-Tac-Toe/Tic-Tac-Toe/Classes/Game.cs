@@ -19,26 +19,33 @@ namespace Tic_Tac_Toe.Classes
 
             Player whoPlaying = player1;
 
+            // Continue the do while loop until someone wins or both players played in total of 9 times(Board is full)
             do
             {
+                //Calls a method to find who is going to play
                 whoPlaying = WhoseTurn(whoPlaying, player1, player2);
+                // number is initialized to 0 because the TryParse returns a 0. As long as the number is still 0 it will ask the user to input a valid num
                 int number = 0;
                 while (number == 0)
                 {
                     Console.WriteLine($"It is your turn, {whoPlaying.Name}. Please choose your position");
                     Int32.TryParse(Console.ReadLine(), out number);
+                    // Valid number is a postive int from 1 to 9 and a number that hasn't been guessed yet
                     if (number > 0 && number < 10 && !player1.GuessedNum.Contains(number) && !player2.GuessedNum.Contains(number))
                         ShowMarkerOnBoard(number, gameBoard, whoPlaying);
                     else
                         number = 0;
                 }
+                //Displauys game board
                 gameBoard.ShowPlayArea();
+                // Checks if anyone has won
                 whoPlaying.WinningPlayer = DidSomeoneWin(whoPlaying);
 
                 counter++;
 
             } while (!whoPlaying.WinningPlayer && counter < 9);
 
+            // If no has won after leaving the while loop, show the tie message
             if (!player1.WinningPlayer && !player2.WinningPlayer)
             {
                 Console.WriteLine("Tie Game!");
@@ -91,7 +98,9 @@ namespace Tic_Tac_Toe.Classes
                 {
                     if (gameBoard.PlayArea[i][j] == number.ToString())
                     {
+                        // Replace the number with the player's marker
                         gameBoard.PlayArea[i][j] = whoPlaying.Marker;
+                        // Save the number to the player's inputs
                         whoPlaying.GuessedNum[whoPlaying.PlayCounter] = number;
                         whoPlaying.PlayCounter++;
                     }
@@ -110,6 +119,7 @@ namespace Tic_Tac_Toe.Classes
             {
                 for (int i = 0; i < Winner.Length; i++)
                 {
+                    //Check the user array with the winning matches
                     int winScore = 0;
                     for (int j = 0; j < Winner[i].Length; j++)
                     {
@@ -118,6 +128,7 @@ namespace Tic_Tac_Toe.Classes
                             winScore++;
                         }
                     }
+                    //if there is a match winScore will be three and the game will know there was a winner
                     if (winScore == 3)
                     {
                         Console.WriteLine($"Congratulations, {whoPlaying.Name}!! \nYOU ARE ARE TRUE CHAMPION");
