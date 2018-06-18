@@ -56,7 +56,7 @@ namespace Tic_Tac_Toe
             // Creates a new instance of Game class
             Game game = new Game();
 
-            g ame.GameLogic(player1, player2, gameBoard);
+            game.GameLogic(player1, player2, gameBoard);
         }
 
         /// <summary>
